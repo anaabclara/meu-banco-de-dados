@@ -28,7 +28,14 @@ app.post("/usuario", async (req, res) => {
 
         res.status(500).send(e)
     }
-})
+});
+
+app.get('/listarUsuarios', async(req, res) =>{
+   
+
+
+    res.send(usuariosLista)
+});
 
 
 
