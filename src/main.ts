@@ -12,7 +12,7 @@ app.post("/usuario", async (req, res) => {
     const nome = req.body.nome;
     const email = req.body.email;
     const telefone = req.body.telefone
-
+    const descricao = req.body.descricao
     try {
         
         const docRef = await firestore.addDoc(firestore.collection(db, 'usuarios'),
@@ -20,6 +20,7 @@ app.post("/usuario", async (req, res) => {
             nome: nome,
             email: email,
             telefone: telefone,
+            descricao: descricao
         });
         res.send("Usuario adicionado com sucesso " + docRef.id)
 
