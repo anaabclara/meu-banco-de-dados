@@ -8,21 +8,21 @@ app.get('/', (req, res) => {
     res.send("Bem vindo a minha primeira API");
 })
 
-app.post("/usuario", async (req, res) => {
+app.post("/formulario", async (req, res) => {
     const nome = req.body.nome;
+    const telefone = req.body.telefone;
     const email = req.body.email;
-    const telefone = req.body.telefone
-    const descricao = req.body.descricao
+    const descricao = req.body.descricao;
     try {
         
-        const docRef = await firestore.addDoc(firestore.collection(db, 'usuarios'),
+        const docRef = await firestore.addDoc(firestore.collection(db, 'formulario'),
         {
             nome: nome,
-            email: email,
             telefone: telefone,
-            descricao: descricao
+            email: email,
+            descricao: descricao,
         });
-        res.send("Usuario adicionado com sucesso " + docRef.id)
+        res.send("Rsposta enviada com sucesso " + docRef.id)
 
     } catch (e) {
         console.log(e)
@@ -31,19 +31,19 @@ app.post("/usuario", async (req, res) => {
     }
 });
 
-app.get('/listarUsuarios', async(req, res) =>{
+app.get('/listarformulario', async(req, res) =>{
     try {
-        const usuarios = await firestore.getDocs(firestore.collection(db, 'usuarios'))
+        const formulario = await firestore.getDocs(firestore.collection(db, 'formulario'))
 
-        const usuariosLista = usuarios.docs.map((doc) => ({
+        const formularioLista = formulario.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
         }))
 
-        res.send(usuariosLista)
+        res.send(formularioLista)
     } catch (e) {
-        console.log("Erro ao listar usuários" + e)
-        res.status(500).send("Erro ao listar usuários" +e)
+        console.log("Erro ao listar formulario" + e)
+        res.status(500).send("Erro ao listar formulario" +e)
     }
 
 app.put('/atualizarUsuario/:id', async (req, res)=>{
