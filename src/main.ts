@@ -59,7 +59,7 @@ app.put("/atualizarFormulario/:id", async (req, res)=>{
 
 
     try {
-        await firestore.updateDoc(firestore.doc(db, "usuarios", id), {
+        await firestore.updateDoc(firestore.doc(db, "formulario", id), {
             nome: nome,
         })
         res.send("Formulario atualizado com sucesso!")
@@ -75,7 +75,7 @@ app.delete("/deletarFormulario/:id",async (req,res) =>{
     const id = req.params.id
 
     try {
-      await firestore.deleteDoc(firestore.doc(db,"Formulario", id))  
+      await firestore.deleteDoc(firestore.doc(db,"formulario", id))  
 
       res.send("formulario deletado com sucesso!")
     } catch (e) {
